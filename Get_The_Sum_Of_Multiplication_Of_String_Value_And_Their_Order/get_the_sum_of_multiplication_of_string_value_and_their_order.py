@@ -19,18 +19,11 @@ def get_dict_A_to_Z():
 	dict_A_to_Z = dict(zip(list_A_to_Z, list_1_to_26))
 	return dict_A_to_Z
 
-def get_the_sum_of_multiplication_of_string_value_and_their_order(list_input, dict_A_to_Z):
-	output_sum = 0
-	
-	for i in range(len(list_input)):
-		list_string = []
-		[list_string.append(dict_A_to_Z.get(chart)) for chart in list_input[i]]
-		string_value = reduce(lambda x,y:x+y, list_string) * (i+1)
-		list_input[i] = string_value
-	print 'The input list value: ', list_input
+def get_list_of_value_of_chart(string):
+	return [dict_A_to_Z.get(chart) for chart in string]
 
-	output_sum = reduce(lambda x,y:x+y, list_input)
-	return output_sum
+def get_the_sum_of_multiplication_of_string_value_and_their_order(list_input, dict_A_to_Z):
+	return [reduce(lambda x,y:x+y, [(reduce(lambda x,y:x+y, get_list_of_value_of_chart(list_input[i])) * (i+1)) for i in range(len(list_input))])]
 
 if __name__ == '__main__':
 	sample_data = sys.argv[1]
